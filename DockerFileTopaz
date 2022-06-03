@@ -1,0 +1,19 @@
+
+#FROM quay.io/wildfly/wildfly:26.0.1.Final
+FROM jboss/wildfly:10.1.0.Final
+USER root
+
+RUN chmod 777 /opt/jboss/wildfly/bin/runtopaz.sh
+
+EXPOSE 8080
+
+VOLUME /topaz/modules/ /opt/jboss/wildfly/modules/
+VOLUME /topaz/standalone/ /opt/jboss/wildfly/standalone/
+
+RUN mkdir /opt/jboss/wildfly/standalone/log \
+&& chmod +x /opt/jboss/wildfly/bin/runtopaz.sh \
+&& chown -R jboss:0 /opt/jboss/wildfly \
+&& chmod -R g+rw /opt/jboss/wildfly
+
+CMD ["/opt/jboss/wildfly/bin/runtopaz.sh"]
+
