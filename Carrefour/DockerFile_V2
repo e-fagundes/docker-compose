@@ -1,4 +1,3 @@
-#FROM maven:3.8.5-jdk-11 as BUILD
 #FROM quay.io/wildfly/wildfly:26.0.1.Final
 FROM jboss/wildfly:10.1.0.Final
 
@@ -6,7 +5,7 @@ USER root
 
 EXPOSE 8080
 
-COPY wildfly /opt/jboss/wildfly
+COPY /topaz/ /opt/jboss/wildfly
 
 RUN mkdir /opt/jboss/wildfly/standalone/log \
 && chown -R jboss:0 /opt/jboss/wildfly \
